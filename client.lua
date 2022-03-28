@@ -129,6 +129,9 @@ Citizen.CreateThread(function() --
                 DeleteEntity(buffalo)
                 SetEntityAsNoLongerNeeded(buffalo)
                 buffalo = nil
+		if riding == true then 
+                    ClearPedTasksImmediately(PlayerPedId())
+                end
             else
                 if IsEntityDead(buffalo) then 
                     DeleteEntity(buffalo)
