@@ -105,8 +105,11 @@ end
 
 function RemoveBuffalo()
     DeleteEntity(buffalo)
-	SetEntityAsNoLongerNeeded(buffalo)
+    SetEntityAsNoLongerNeeded(buffalo)
     buffalo = nil
+ if riding == true then 
+        riding = false
+    end
 end
 
 local pcoords = nil
@@ -126,17 +129,16 @@ Citizen.CreateThread(function() --
         if buffalo ~= nil then 
             local dist = GetDistanceBetweenCoords(pcoords, GetEntityCoords(buffalo), 1)
             if dist > Config.DeleteDistance then 
-                DeleteEntity(buffalo)
-                SetEntityAsNoLongerNeeded(buffalo)
-                buffalo = nil
 		if riding == true then 
                     ClearPedTasksImmediately(PlayerPedId())
                 end
+		RemoveBuffalo()
             else
                 if IsEntityDead(buffalo) then 
-                    DeleteEntity(buffalo)
-                    SetEntityAsNoLongerNeeded(buffalo)
-                    buffalo = nil
+		if riding == true then 
+                    ClearPedTasksImmediately(PlayerPedId())
+                end
+                    RemoveBuffalo()
                 end
             end
             
