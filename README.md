@@ -9,6 +9,6 @@ Travel works with Map Waypoint marker, select a waypoint on the map and press th
 Player can leave anytime the Buffalo. and later mount back. 
 If the player moves far away from Buffalo or the Buffalo dies, player must rent a new one to ride again.
 
-Compatible with RedEM:RP and VORP RedM frameworks.
+Compatible with RedEM:RP, QBR and VORP RedM frameworks.
 
 RicX RedM Scripts Discord: https://discord.gg/CcZ7QmHJWu
