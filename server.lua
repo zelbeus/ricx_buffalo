@@ -1,6 +1,6 @@
 
 
-ServerFramework = "redemrp" -- "redemrp" or "vorp"
+ServerFramework = "redemrp" -- "redemrp" or "vorp" or "qbr"
 
 local VorpCore
 
@@ -41,6 +41,15 @@ AddEventHandler("ricx_buffalo:check_rent", function(id)
         local money = Character.money
         if money >= price then 
             Character.removeCurrency(0 , tonumber(price))
+            TriggerClientEvent("ricx_buffalo:rented_buffalo", _source)
+        else
+            return
+        end
+    elseif ServerFramework == "qbr" then
+        local User = exports['qbr-core']:GetPlayer(_source)
+        local money = User.Functions.GetMoney("cash")
+        if money >= price then 
+	    User.Functions.RemoveMoney("cash", tonumber(price), "desc")
             TriggerClientEvent("ricx_buffalo:rented_buffalo", _source)
         else
             return
