@@ -1,7 +1,7 @@
 # ricx_buffalo
 RedM Script: Rent and ride Buffalo
 
-RedEMRP & VORP
+RedEMRP & VORP & QBR
 
 Users can set different Rent Stables for players to rent buffalos for the price.
 Once the Buffalo is rented, players can use mount it to travel with it. 
