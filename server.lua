@@ -1,13 +1,18 @@
 
+ 
+ServerFramework = "redemrp" -- "redemrp" or "vorp" or "qbr" or "qbr2" or "rsg" or "redemrp-reboot"
 
-ServerFramework = "redemrp" -- "redemrp" or "vorp" or "qbr"
-
-local VorpCore
-
+local VorpCore, QRCore, RSGCore, RedEM
 if ServerFramework == "vorp" then
     TriggerEvent("getCore",function(core)
         VorpCore = core
     end)
+elseif ServerFramework == "redemrp-reboot" then
+    RedEM = exports["redem_roleplay"]:RedEM()
+elseif ServerFramework == "qbr2" then
+    QRCore = exports["qr-core"]:GetCoreObject()
+elseif ServerFramework == "rsg" then
+    RSGCore = exports["rsg-core"]:GetCoreObject()
 end
 
 ServerRents = {
@@ -36,6 +41,30 @@ AddEventHandler("ricx_buffalo:check_rent", function(id)
                 return
             end
         end)
+    elseif ServerFramework == "redemrp-reboot" then
+        local Player = RedEM.GetPlayer(_source)
+	if Player.money >= price then 
+                Player.RemoveMoney(price)
+		TriggerClientEvent("ricx_buffalo:rented_buffalo", _source)
+	else
+                return	
+	end
+    elseif ServerFramework == "qbr2" then
+        local User = QRCore.Functions.GetPlayer(_source)
+	if User.PlayerData.money.cash >= price then 
+                User.Functions.RemoveMoney("cash", price, "RicX Buffalo: Remove Money")
+		TriggerClientEvent("ricx_buffalo:rented_buffalo", _source)
+	else
+                return	
+	end	
+    elseif ServerFramework == "rsg" then
+        local User = RSGCore.Functions.GetPlayer(_source)
+	if User.PlayerData.money.cash >= price then 
+                User.Functions.RemoveMoney("cash", price, "RicX Buffalo: Remove Money")
+		TriggerClientEvent("ricx_buffalo:rented_buffalo", _source)
+	else
+                return	
+	end		
     elseif ServerFramework == "vorp" then
         local Character = VorpCore.getUser(_source).getUsedCharacter
         local money = Character.money
